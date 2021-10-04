@@ -17,21 +17,29 @@ class DB_Utils {
 			password: this.password
 		});
 		
-		con.connect(function(err) {
-			if (err) throw err;
-			console.log("Connected!");
-		});
+		return con;
 	}
 	
 	function exec_sql_file(path) {
 		//reads an sql file and executes it
 	}
 	
-	function exec_result(sql) {
+	function exec_sql(sql) {
 		//returns the result of a query
-	}
-	
-	function exec_commit(sql) {
-		//commits the given sql
+		var con = connect();
+		
+		//connects to the database
+		var result = con.connect(function(err) {
+			if (err) throw err;
+			
+			//queries the database. Throws an error if there's a problem
+			let result = con.query(sql, function(err, result) {
+				if (err) throw err;
+				return result;
+			});
+			return result;
+		});
+		
+		return result;
 	}
 }
