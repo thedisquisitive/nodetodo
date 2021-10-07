@@ -1,3 +1,5 @@
+const mysql = require('mysql');
+
 class DB_Utils {
 	//helpful helper functions for a databse
 	
@@ -7,9 +9,9 @@ class DB_Utils {
 		this.password = password;
 	}
 	
-	function connect() {
+	connect() {
 		//connects to a databse
-		var mysql = require('mysql');
+		
 		
 		var con = mysql.createConnection({
 			host: this.host,
@@ -20,11 +22,11 @@ class DB_Utils {
 		return con;
 	}
 	
-	function exec_sql_file(path) {
+	exec_sql_file(path) {
 		//reads an sql file and executes it
 	}
 	
-	function exec_sql(sql) {
+	exec_sql(sql) {
 		//returns the result of a query
 		var con = connect();
 		
@@ -43,3 +45,5 @@ class DB_Utils {
 		return result;
 	}
 }
+
+modules_export = DB_Utils
